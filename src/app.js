@@ -1,8 +1,8 @@
 const express = require('express');
 const produtoRoutes = require('./routes/produtoRoutes');
+const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
-
 
 // Middleware que permite o Express entender JSON no corpo das requisições
 app.use(express.json());
@@ -13,4 +13,6 @@ app.get('/', (req, res) => {
 });
 
 app.use('/produtos', produtoRoutes);
+app.use(errorHandler);
+
 module.exports = app;
