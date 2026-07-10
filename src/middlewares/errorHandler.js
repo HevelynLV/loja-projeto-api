@@ -14,6 +14,12 @@ const errorHandler = (err, req, res, next) => {
     message = `ID inválido: ${err.value}`;
   }
 
+  if (err.code === 11000) {
+    statusCode = 409;
+    const campo = Object.keys(err.keyValue)[0];
+    message = `O valor '${err.keyValue[campo]}' já está em uso no campo '${campo}'`;
+  }
+
   console.error(err);
 
   res.status(statusCode).json({ erro: message });
