@@ -1,6 +1,7 @@
 const express = require('express');
 const produtoRoutes = require('./routes/produtoRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
+const carrinhoRoutes = require('./routes/carrinhoRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
@@ -15,6 +16,7 @@ app.get('/', (req, res) => {
 
 app.use('/produtos', produtoRoutes);
 app.use('/usuarios', usuarioRoutes);
+app.use('/carrinho', carrinhoRoutes);
 
 app.use(errorHandler);
 
