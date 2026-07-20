@@ -2,6 +2,7 @@ const Carrinho = require('../models/Carrinho');
 const Pedido = require('../models/Pedido');
 const AppError = require('../utils/AppError');
 const asyncHandler = require('../utils/asyncHandler');
+const { transicaoValida } = require('../utils/transicaoStatus');
 
 const criarPedido = asyncHandler(async (req, res) => {
   const { usuarioId } = req.params;
@@ -41,4 +42,29 @@ const criarPedido = asyncHandler(async (req, res) => {
   res.status(201).json(pedido);
 });
 
-module.exports = { criarPedido };
+const atualizarStatusPedido = asyncHandler(async (req, res) => {
+  const { pedidoId } = req.params;
+  const { status: statusNovo } = req.body;
+
+  const pedido = await Pedido.findById(pedidoId);
+
+  if (!pedido) {
+    throw new AppError('Pedido não encontrado.', 404);
+  }
+
+  const statusAtual = pedido.status;
+
+  if (!transicaoValida(statusAtual, statusNovo)) {
+    throw new AppError(
+      `Não é possível mudar o status de "${statusAtual}" para "${statusNovo}".`,
+      400
+    );
+  }
+
+  pedido.status = statusNovo;
+  await pedido.save();
+
+  res.status(200).json(pedido);
+});
+
+module.exports = { criarPedido, atualizarStatusPedido };
