@@ -4,7 +4,7 @@ const Carrinho = require('../models/Carrinho');
 const Produto = require('../models/Produto');
 
 const adicionarItem = asyncHandler(async (req, res) => {
-  const { usuarioId } = req.params;
+  const { usuarioId } = req;
   const { produtoId, quantidade } = req.body;
 
   // 1. Verifica se o Produto existe de verdade
@@ -48,7 +48,7 @@ const adicionarItem = asyncHandler(async (req, res) => {
 
 
 const verCarrinho = asyncHandler(async (req, res) => {
-  const { usuarioId } = req.params;
+  const { usuarioId } = req;
 
   const carrinho = await Carrinho.findOne({ usuario: usuarioId }).populate('itens.produto');
 
@@ -61,7 +61,8 @@ const verCarrinho = asyncHandler(async (req, res) => {
 
 
 const atualizarItem = asyncHandler(async (req, res) => {
-  const { usuarioId, itemId } = req.params;
+  const { usuarioId } = req;
+  const { itemId } = req.params;
   const { quantidade } = req.body;
 
   if (!quantidade || quantidade < 1) {
@@ -90,7 +91,8 @@ const atualizarItem = asyncHandler(async (req, res) => {
 });
 
 const removerItem = asyncHandler(async (req, res) => {
-  const { usuarioId, itemId } = req.params;
+  const { usuarioId } = req;
+  const { itemId } = req.params;
 
   const carrinho = await Carrinho.findOne({ usuario: usuarioId });
 
@@ -114,7 +116,7 @@ const removerItem = asyncHandler(async (req, res) => {
 });
 
 const esvaziarCarrinho = asyncHandler(async (req, res) => {
-  const { usuarioId } = req.params;
+  const { usuarioId } = req;
 
   const carrinho = await Carrinho.findOne({ usuario: usuarioId });
 
