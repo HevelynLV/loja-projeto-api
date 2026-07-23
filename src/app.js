@@ -3,6 +3,7 @@ const produtoRoutes = require('./routes/produtoRoutes');
 const usuarioRoutes = require('./routes/usuarioRoutes');
 const carrinhoRoutes = require('./routes/carrinhoRoutes');
 const pedidoRoutes = require('./routes/pedidoRoutes');
+const authRoutes = require('./routes/authRoutes');
 const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
@@ -10,6 +11,7 @@ const app = express();
 // Middleware que permite o Express entender JSON no corpo das requisições
 app.use(express.json());
 
+app.use('/', authRoutes);
 app.use('/produtos', produtoRoutes);
 app.use('/usuarios', usuarioRoutes);
 app.use('/carrinho', carrinhoRoutes);
