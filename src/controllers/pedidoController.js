@@ -5,7 +5,7 @@ const asyncHandler = require('../utils/asyncHandler');
 const { transicaoValida } = require('../utils/transicaoStatus');
 
 const criarPedido = asyncHandler(async (req, res) => {
-  const { usuarioId } = req.params;
+  const { usuarioId } = req;
 
   const carrinho = await Carrinho.findOne({ usuario: usuarioId }).populate('itens.produto');
 

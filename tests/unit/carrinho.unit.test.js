@@ -13,7 +13,7 @@ describe('carrinhoController - adicionarItem', () => {
 
   beforeEach(() => {
     req = {
-      params: { usuarioId: 'usuario123' },
+      usuarioId: 'usuario123',
       body: { produtoId: 'produto123', quantidade: 2 },
     };
     res = {
@@ -97,7 +97,7 @@ describe('carrinhoController - verCarrinho', () => {
   let req, res;
 
   beforeEach(() => {
-    req = { params: { usuarioId: 'usuario123' } };
+    req = { usuarioId: 'usuario123' };
     res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
     jest.clearAllMocks();
   });
@@ -124,7 +124,8 @@ describe('carrinhoController - atualizarItem', () => {
 
   beforeEach(() => {
     req = {
-      params: { usuarioId: 'usuario123', itemId: 'item123' },
+      usuarioId: 'usuario123',
+      params: { itemId: 'item123' },
       body: { quantidade: 5 },
     };
     res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
@@ -167,7 +168,7 @@ describe('carrinhoController - removerItem', () => {
   let req, res;
 
   beforeEach(() => {
-    req = { params: { usuarioId: 'usuario123', itemId: 'item123' } };
+    req = { usuarioId: 'usuario123', params: { itemId: 'item123' } };
     res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
     jest.clearAllMocks();
   });
@@ -203,7 +204,7 @@ describe('carrinhoController - esvaziarCarrinho', () => {
   let req, res;
 
   beforeEach(() => {
-    req = { params: { usuarioId: 'usuario123' } };
+    req = { usuarioId: 'usuario123' };
     res = { status: jest.fn().mockReturnThis(), json: jest.fn() };
     jest.clearAllMocks();
   });

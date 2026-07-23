@@ -13,7 +13,7 @@ describe('pedidoController - criarPedido', () => {
   let req, res;
 
   beforeEach(() => {
-    req = { params: { usuarioId: 'usuario123' } };
+    req = { usuarioId: 'usuario123' };
     res = {
       status: jest.fn().mockReturnThis(),
       json: jest.fn(),
